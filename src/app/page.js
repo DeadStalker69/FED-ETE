@@ -50,6 +50,20 @@ const page = () => {
     }
     if(newAmount<0)
     {
+      if((newAmount + currentTotal) < 0)
+      {
+        toast.error("Debit amount cannot be more than total holdings.", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+          });
+          return;
+      }
       const updatedDebit = currentDebit + newAmount
       setDebit(updatedDebit)
       settotal(updatedTotal)

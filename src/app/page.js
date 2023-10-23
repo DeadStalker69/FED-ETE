@@ -20,7 +20,7 @@ const page = () => {
   const [debit, setDebit] = useState("0")
   const [loan, setLoan] = useState("0")
   const [total, settotal] = useState("0")
-  const [loanrepayment, setloanrepayment] = useState("")
+  const [loanrepayment, setloanrepayment] = useState(NaN)
 
   const [mainTask, setMainTask] = useState([])
 
@@ -62,8 +62,33 @@ const page = () => {
 
   const loan_handler =(loan, loanrepayment, total, debit, transactionHandler)=>{
     let updatedTransactionData
-
-    if(loanrepayment>total)
+    if(isNaN(loanrepayment) || loanrepayment < 0)
+    {
+      toast.error("Enter a valid value first", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    else if(loan == 0)
+    {
+      toast("No loans are due", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    else if(loanrepayment>total)
     {
       toast.error("The loan amount is more than money availible. Cannot process the transaction.", {
         position: "top-center",

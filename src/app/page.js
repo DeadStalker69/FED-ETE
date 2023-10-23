@@ -65,20 +65,29 @@ const page = () => {
 
     if(loanrepayment>total)
     {
-      alert("The loan amount is more than money availible. Cannot process the transaction.")
+      toast.error("The loan amount is more than money availible. Cannot process the transaction.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        });
     }
 
-    if(loanrepayment > loan)
+    else if(loanrepayment > loan)
     {
       toast.info("The amount entered is more than the loan you have. Automatically entering the value equal to loan.", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
+        pauseOnHover: false,
+        draggable: false,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         });
 
       total = total - loan
@@ -94,7 +103,16 @@ const page = () => {
         CurrentDate: moment().format('MMMM Do YYYY')
       };
       transactionHandler.push(updatedTransactionData)
-      alert("Loan Repaid!!")
+      toast.success("Loan Repaid", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        });
     }
 
     else{
@@ -112,7 +130,16 @@ const page = () => {
         CurrentDate: moment().format('MMMM Do YYYY')
       };
       transactionHandler.push(updatedTransactionData)
-      alert("Loan Repaid!!")
+      toast.success("Loan Repaid", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        });
     }
   }
   
@@ -151,11 +178,12 @@ const page = () => {
     <hr/> <br/>
     <Table1 credit={credit} debit={debit} loan={loan} total={total} totalColor={totalColor} />
     <div className='flex items-center justify-center'>
-    <input type='number' className='text-2xl border-zinc-800 border-2 m-5 px-4 py-2' placeholder='Enter loan amount repaid'  value={loanrepayment} onChange={(e) =>{setloanrepayment(e.target.value)}}/>
+    <input type='number' className='text-2xl border-zinc-800 border-2 m-5 px-4 py-2' placeholder='Enter loan amount paid'  value={loanrepayment} onChange={(e) =>{setloanrepayment(e.target.value)}}/>
     <button className='bg-black text-white px-4 py-3 text-2xl font-bold rounded m-5' onClick={()=>{{loan_handler(loan, loanrepayment, total, debit, mainTask)}}}>Loan Repaid</button>
     </div> <br/>
     <History renderTask={renderTask} />
     <hr />
+    <ToastContainer />
    </>
   )
 }

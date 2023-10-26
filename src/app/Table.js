@@ -1,5 +1,4 @@
 import React from 'react'
-import page from './page'
 
 export const Table1 = ({ credit, debit, loan, total, totalColor }) => {
   return (
